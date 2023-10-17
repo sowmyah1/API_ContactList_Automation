@@ -28,8 +28,9 @@ public class UserEndPoints {
         return response;
 
     }
-    public static Response updateUser(User Payload){
+    public static Response updateUser(User Payload,String token){
         Response response = given()
+                .header("Authorization","Bearer "+token)
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .body(Payload)
@@ -39,8 +40,9 @@ public class UserEndPoints {
         return response;
 
     }
-    public static Response loginUser(User Payload){
+    public static Response loginUser(User Payload,String token){
         Response response = given()
+                .header("Authorization","Bearer "+token)
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)
                 .body(Payload)
@@ -51,8 +53,9 @@ public class UserEndPoints {
 
     }
 
-    public static Response logoutUser(){
+    public static Response logoutUser(String token){
         Response response =given()
+                .header("Authorization","Bearer "+token)
                                   .contentType(ContentType.JSON)
                           .when()
                                   .post(Routes.logOutUser);
@@ -60,8 +63,9 @@ public class UserEndPoints {
         return response;
 
     }
-    public static Response deleteUser(){
+    public static Response deleteUser(String token){
         Response response =given()
+                .header("Authorization","Bearer "+token)
                 .contentType(ContentType.JSON)
                 .when()
                 .post(Routes.deleteUser);
