@@ -21,6 +21,40 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
+
+
+        // TestNG (for testing)
+        testImplementation 'org.testng:testng:7.8.0'
+
+        // Rest-Assured (for API testing)
+        testImplementation 'io.rest-assured:rest-assured:5.3.1'
+
+        // JSON Simple
+        implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
+        // Gson (Google JSON library)
+        implementation 'com.google.code.gson:gson:2.10.1'
+
+        // Rest-Assured JSON Schema Validator
+        testImplementation 'io.rest-assured:json-schema-validator:5.3.1'
+
+        // Selenium WebDriver
+        implementation 'org.seleniumhq.selenium:selenium-java:4.12.0'
+
+        // Jackson Databind (JSON processing)
+        implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+
+        // Lombok (provided scope as it's typically used for development only)
+        implementation 'org.projectlombok:lombok:1.18.28'
+
+        // Cucumber (for BDD testing)
+        implementation 'io.cucumber:cucumber-java:7.14.0'
+
+        // Cucumber TestNG (integration with TestNG)
+        implementation 'io.cucumber:cucumber-testng:7.14.0'
+    implementation 'com.github.javafaker:javafaker:1.0.2'
+
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
