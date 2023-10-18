@@ -14,6 +14,7 @@ public class UserTest {
         User userPayload;
         static String token;
         String id;
+        static String loginUserId;
     String loginToken;
     public String getToken()
     {
@@ -63,6 +64,7 @@ public class UserTest {
     public void testLoginUser(){
         Response response = UserEndPoints.loginUser(userPayload,token);
          loginToken = response.jsonPath().getString("token");
+         loginUserId = response.jsonPath().getString("user._id");
         System.out.println(loginToken);
         response.then().log().all();
         Assert.assertEquals(response.getStatusCode(),200,"Login not successful");
@@ -80,6 +82,7 @@ public class UserTest {
        this.testLoginUser();
         Response response  = UserEndPoints.deleteUser(loginToken);
         System.out.println("this is for delete");
+        System.out.println(loginToken);
         response.then().log().all();
         Assert.assertEquals(response.getStatusCode(),200,"Delete user unsuccessful");
     }

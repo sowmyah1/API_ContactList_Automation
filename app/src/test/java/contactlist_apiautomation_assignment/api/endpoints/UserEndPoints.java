@@ -68,7 +68,7 @@ public class UserEndPoints {
                 .header("Authorization","Bearer "+token)
                 .contentType(ContentType.JSON)
                 .when()
-                .post(Routes.deleteUser);
+                .delete(Routes.deleteUser);
 
         return response;
 
