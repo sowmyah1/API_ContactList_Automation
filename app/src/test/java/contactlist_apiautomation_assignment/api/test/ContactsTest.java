@@ -29,18 +29,11 @@ public class ContactsTest {
         contactsPayload.setFirstName(faker.name().firstName());
         contactsPayload.setLastName(faker.name().lastName());
         contactsPayload.setCity(faker.address().cityName());
-//        contactsPayload.setBirthdate(String.valueOf(faker.date().birthday(0,100)));
-        contactsPayload.getBirthdate();
         contactsPayload.setCountry(faker.address().country());
         contactsPayload.setEmail(faker.internet().emailAddress());
-        contactsPayload.getPhone();
-        contactsPayload.getPostalCode();
-        contactsPayload.getStreet1();
-        contactsPayload.getStreet2();
-        contactsPayload.getStateProvince();
 
     }
-    @Test(priority = 1)
+    @Test(priority = 1,groups = "smoke")
     public void testAddContacts(){
 
             Response response = ContactsEndPoints.addContacts(contactsPayload,userToken);
@@ -50,21 +43,21 @@ public class ContactsTest {
             Assert.assertEquals(response.getStatusCode(),201,"User not created");
 
     }
-    @Test(priority = 2)
+    @Test(priority = 2,groups = "sanity")
     public void testReadContactList(){
         Response response = ContactsEndPoints.readContactList(userToken);
         response.then().log().all();
 
         Assert.assertEquals(response.getStatusCode(),200,"Cannot retrieve contact List");
     }
-    @Test(priority = 3)
+    @Test(priority = 3,groups = "sanity")
     public void testReadContacts(){
         Response response = ContactsEndPoints.readContact(userToken);
         response.then().log().all();
 
         Assert.assertEquals(response.getStatusCode(),200,"Cannot get contact details");
     }
-    @Test(priority = 4)
+    @Test(priority = 4,groups = "regression")
     public void testUpdateContact(){
 
         contactsPayload.setFirstName(faker.name().firstName());
@@ -88,7 +81,7 @@ public class ContactsTest {
         Assert.assertEquals(responseAfterUpdate.getStatusCode(),200,"User details are not updated");
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5,groups = "regression")
     public void testUpdateContactFirstName(){
         contactsPayload.setFirstName(faker.name().firstName());
         Response response = ContactsEndPoints.updateContactFirstName(contactsPayload,userToken,contactId);
@@ -101,7 +94,7 @@ public class ContactsTest {
 
         Assert.assertEquals(responseAfterUpdateFirstName.getStatusCode(),200,"First name cannot be updated");
     }
-    @Test(priority = 6)
+    @Test(priority = 6,groups = "smoke")
     public void testdeleteContacts(){
         Response response = ContactsEndPoints.deleteContacts(userToken,contactId);
         response.then().log().all();

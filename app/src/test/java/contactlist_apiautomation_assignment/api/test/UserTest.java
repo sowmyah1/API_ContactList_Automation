@@ -31,7 +31,7 @@ public class UserTest {
         userPayload.setEmail(faker.internet().emailAddress());
         userPayload.setPassword(faker.internet().password());
     }
-    @Test(priority = 1)
+    @Test(priority = 1,groups = "smoke")
     public void testPostUser(){
         Response response = UserEndPoints.createUser(userPayload);
         response.then().log().all();
@@ -40,7 +40,7 @@ public class UserTest {
 
         Assert.assertEquals(response.getStatusCode(),201,"User not created");
     }
-    @Test(priority = 2)
+    @Test(priority = 2,groups = "sanity")
     public void testGetUser(){
         Response response= UserEndPoints.readUser(token);
         response.then().log().all();
@@ -48,7 +48,7 @@ public class UserTest {
         Assert.assertEquals(response.getStatusCode(),200,"Cannot access user details");
         Assert.assertEquals(id1,id,"user did not match");
     }
-    @Test(priority = 3)
+    @Test(priority = 3,groups = "regression")
     public void testUpdateUser(){
         userPayload.setFirstName(faker.name().firstName());
         userPayload.setLastName(faker.name().lastName());
@@ -60,7 +60,7 @@ public class UserTest {
 
         Assert.assertEquals(responseAfterUpdate.statusCode(),200,"User details not updated ");
     }
-    @Test(priority = 4)
+    @Test(priority = 4,groups = "sanity")
     public void testLoginUser(){
         Response response = UserEndPoints.loginUser(userPayload,token);
          loginToken = response.jsonPath().getString("token");
@@ -71,13 +71,13 @@ public class UserTest {
 
     }
 
-    @Test(priority = 5)
+    @Test(priority = 5,groups = "sanity")
     public void testLogoutUser(){
         Response response = UserEndPoints.logoutUser(token);
         response.then().log().all();
         Assert.assertEquals(response.getStatusCode(),200,"User logout unsuccessful");
     }
-    @Test(priority = 6)
+    @Test(priority = 6,groups = "smoke")
     public void testDeleteUser(){
        this.testLoginUser();
         Response response  = UserEndPoints.deleteUser(loginToken);
