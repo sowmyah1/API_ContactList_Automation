@@ -5,7 +5,7 @@ public class Routes {
 
     //Contacts
     public static String addContacts = baseUrl+"/contacts";
-    public static String getContacts = baseUrl+"/contacts";
+    public static String getContactList = baseUrl+"/contacts";
     public static String getContact = baseUrl+"/contacts/";
     public static String updateContact = baseUrl+"/contacts/";
     public static String deleteContact = baseUrl+"/contacts/";
@@ -18,6 +18,8 @@ public class Routes {
     public static String logOutUser = baseUrl+"/users/logout";
     public static String loginUser = baseUrl+"/users/login";
     public static String deleteUser = baseUrl+"/users/me";
+
+
 
 
 }

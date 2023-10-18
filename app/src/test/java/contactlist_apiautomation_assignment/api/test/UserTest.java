@@ -8,13 +8,20 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+
 public class UserTest {
         Faker faker;
         User userPayload;
-        String token;
+        static String token;
         String id;
+    String loginToken;
+    public String getToken()
+    {
+        return token;
+    }
     @BeforeClass
     public void setUpData(){
+
         faker = new Faker();
         userPayload = new User();
 
@@ -29,8 +36,7 @@ public class UserTest {
         response.then().log().all();
         token =response.jsonPath().getString("token");
         id = response.jsonPath().getString("user._id");
-        System.out.println(token);
-        System.out.println(id);
+
         Assert.assertEquals(response.getStatusCode(),201,"User not created");
     }
     @Test(priority = 2)
@@ -49,15 +55,18 @@ public class UserTest {
         response.then().log().all();
         Assert.assertEquals(response.getStatusCode(),200,"User details not updated");
 
-        Response responseAfterUpdate = UserEndPoints.readUser(userPayload.getFirstName());
-        responseAfterUpdate.
+        Response responseAfterUpdate = UserEndPoints.readUser(token);
+
         Assert.assertEquals(responseAfterUpdate.statusCode(),200,"User details not updated ");
     }
     @Test(priority = 4)
     public void testLoginUser(){
         Response response = UserEndPoints.loginUser(userPayload,token);
+         loginToken = response.jsonPath().getString("token");
+        System.out.println(loginToken);
         response.then().log().all();
         Assert.assertEquals(response.getStatusCode(),200,"Login not successful");
+
     }
 
     @Test(priority = 5)
@@ -68,7 +77,8 @@ public class UserTest {
     }
     @Test(priority = 6)
     public void testDeleteUser(){
-        Response response  = UserEndPoints.deleteUser(token);
+       this.testLoginUser();
+        Response response  = UserEndPoints.deleteUser(loginToken);
         System.out.println("this is for delete");
         response.then().log().all();
         Assert.assertEquals(response.getStatusCode(),200,"Delete user unsuccessful");

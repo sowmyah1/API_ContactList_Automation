@@ -2,10 +2,10 @@ package contactlist_apiautomation_assignment.api.payload;
 
 public class User {
 
-    String firstName = "Test";
-    String lastName= "User";
-    String email= "test@fake.com";
-    String password= "myPassword";
+    String firstName ;
+    String lastName;
+    String email;
+    String password;
 
     public String getEmail() {
         return email;

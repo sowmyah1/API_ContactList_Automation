@@ -23,6 +23,7 @@ dependencies {
     implementation 'com.google.guava:guava:31.1-jre'
 
 
+
         // TestNG (for testing)
         testImplementation 'org.testng:testng:7.8.0'
 
@@ -53,6 +54,8 @@ dependencies {
         // Cucumber TestNG (integration with TestNG)
         implementation 'io.cucumber:cucumber-testng:7.14.0'
     implementation 'com.github.javafaker:javafaker:1.0.2'
+    implementation group: 'io.qameta.allure', name: 'allure-testng', version: '2.24.0'
+
 
 
 }
